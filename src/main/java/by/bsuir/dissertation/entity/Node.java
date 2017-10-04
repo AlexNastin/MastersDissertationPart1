@@ -20,8 +20,8 @@ public class Node {
 
     private String title;
 
-    @Relationship(type = "NODES", direction = Relationship.UNDIRECTED)
-    private Set<Node> nodes;
+    @Relationship(type = "EDGES", direction = Relationship.UNDIRECTED)
+    private Set<Edge> edges;
 
     public Node(String title) {
         this.title = title;
@@ -30,11 +30,11 @@ public class Node {
     public Node() {
     }
 
-    public void worksWith(Node node) {
-        if (nodes == null) {
-            nodes = new HashSet<>();
+    public void worksWith(Edge edge) {
+        if (edges == null) {
+            edges = new HashSet<>();
         }
-        nodes.add(node);
+        edges.add(edge);
 
     }
 

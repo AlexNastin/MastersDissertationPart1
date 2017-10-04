@@ -1,5 +1,6 @@
 package by.bsuir.dissertation;
 
+import by.bsuir.dissertation.entity.Edge;
 import by.bsuir.dissertation.entity.Node;
 import by.bsuir.dissertation.repository.NodeRepository;
 import org.neo4j.ogm.config.Configuration;
@@ -68,27 +69,34 @@ public class DissertationApplication {
 
 			List<Node> team = Arrays.asList(greg, roy, craig);
 
+			Edge x = new Edge(12);
+			Edge y = new Edge(78);
+			Edge z = new Edge(16);
+
+			List<Edge> team1 = Arrays.asList(x, y, z);
+
 			log.info("Before linking up with Neo4j...");
 
 			team.stream().forEach(person -> log.info("\t" + person.toString()));
 
-			nodeRepository.save(greg);
-			nodeRepository.save(roy);
-			nodeRepository.save(craig);
+//			nodeRepository.save(greg);
+//			nodeRepository.save(roy);
+//			nodeRepository.save(craig);
 
-			greg = nodeRepository.findByTitle(greg.getTitle());
-			greg.worksWith(roy);
-			greg.worksWith(craig);
+//			greg = nodeRepository.findByTitle(greg.getTitle());
+			greg.worksWith(x);
+			greg.worksWith(y);
 			nodeRepository.save(greg);
 
-			roy = nodeRepository.findByTitle(roy.getTitle());
-			roy.worksWith(craig);
+//			roy = nodeRepository.findByTitle(roy.getTitle());
+			roy.worksWith(z);
+			roy.worksWith(y);
 			// We already know that roy works with greg
 			nodeRepository.save(roy);
 
 			// We already know craig works with roy and greg
-			craig = nodeRepository.findByTitle(craig.getTitle());
-			craig.worksWith(greg);
+//			craig = nodeRepository.findByTitle(craig.getTitle());
+			craig.worksWith(y);
 			nodeRepository.save(craig);
 
 			log.info("Lookup each person by name...");
