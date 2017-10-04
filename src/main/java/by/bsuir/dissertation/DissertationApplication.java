@@ -2,6 +2,7 @@ package by.bsuir.dissertation;
 
 import by.bsuir.dissertation.entity.Edge;
 import by.bsuir.dissertation.entity.Node;
+import by.bsuir.dissertation.parse.OSMParser;
 import by.bsuir.dissertation.repository.NodeRepository;
 import org.neo4j.ogm.config.Configuration;
 import org.slf4j.Logger;
@@ -10,9 +11,16 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.neo4j.repository.config.EnableNeo4jRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -52,56 +60,26 @@ public class DissertationApplication {
 	private final static Logger log = LoggerFactory.getLogger(DissertationApplication.class);
 
 
-	public static void main(String[] args) {
-		SpringApplication.run(DissertationApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(DissertationApplication.class, args);
+    }
 
 
-	@Bean
-	CommandLineRunner demo(NodeRepository nodeRepository) {
-		return args -> {
-
+    @Bean
+    CommandLineRunner demo(NodeRepository nodeRepository) {
+        return args -> {
 			nodeRepository.deleteAll();
-
-			Node greg = new Node("Greg");
-			Node roy = new Node("Roy");
-			Node craig = new Node("Craig");
-
-			List<Node> team = Arrays.asList(greg, roy, craig);
-
-			Edge x = new Edge(12);
-			Edge y = new Edge(78);
-			Edge z = new Edge(16);
-
-			List<Edge> team1 = Arrays.asList(x, y, z);
-
-			log.info("Before linking up with Neo4j...");
-
-			team.stream().forEach(person -> log.info("\t" + person.toString()));
-
-//			nodeRepository.save(greg);
-//			nodeRepository.save(roy);
-//			nodeRepository.save(craig);
-
-//			greg = nodeRepository.findByTitle(greg.getTitle());
-			greg.worksWith(x);
-			greg.worksWith(y);
-			nodeRepository.save(greg);
-
-//			roy = nodeRepository.findByTitle(roy.getTitle());
-			roy.worksWith(z);
-			roy.worksWith(y);
-			// We already know that roy works with greg
-			nodeRepository.save(roy);
-
-			// We already know craig works with roy and greg
-//			craig = nodeRepository.findByTitle(craig.getTitle());
-			craig.worksWith(y);
-			nodeRepository.save(craig);
-
-			log.info("Lookup each person by name...");
-			team.stream().forEach(person -> log.info(
-					"\t" + nodeRepository.findByTitle(person.getTitle()).toString()));
+			try {
+				SAXParserFactory parserFactor = SAXParserFactory.newInstance();
+				SAXParser parser = parserFactor.newSAXParser();
+				OSMParser handler = new OSMParser();
+				File file = new ClassPathResource("map.xml").getFile();
+				parser.parse(file, handler);
+				System.out.println(handler.getNodes().size());
+				handler.getNodes().forEach(nodeRepository::save);
+			} catch (SAXException | ParserConfigurationException | IOException e) {
+				log.error("", e);
+			}
 		};
 	}
 

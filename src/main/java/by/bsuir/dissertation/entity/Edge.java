@@ -16,13 +16,18 @@ public class Edge {
     @GraphId
     private Long id;
 
-    private double longEdge;
+    private double distanceEdge;
 
     @Relationship(type = "NODES", direction = Relationship.UNDIRECTED)
-    private Set<Node> nodes;
+    private Node nodeStart;
 
-    public Edge(double longEdge) {
-        this.longEdge = longEdge;
+    @Relationship(type = "NODES", direction = Relationship.UNDIRECTED)
+    private Node nodeEnd;
+
+    public Edge(double distanceEdge, Node nodeStart, Node nodeEnd) {
+        this.distanceEdge = distanceEdge;
+        this.nodeStart = nodeStart;
+        this.nodeEnd = nodeEnd;
     }
 
     public Edge() {

@@ -4,5 +4,5 @@ import by.bsuir.dissertation.entity.Node;
 import org.springframework.data.neo4j.repository.GraphRepository;
 
 public interface NodeRepository extends GraphRepository<Node> {
-    Node findByTitle(String title);
+//    Node findByTitle(String title);
 }
