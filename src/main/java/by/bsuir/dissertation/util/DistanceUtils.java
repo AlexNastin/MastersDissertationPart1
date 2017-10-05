@@ -2,7 +2,7 @@ package by.bsuir.dissertation.util;
 
 public class DistanceUtils {
 
-    public static double distanceCalculate(String latitude1, String longitude1, String latitude2, String longitude2) {
+    public static int distanceCalculate(String latitude1, String longitude1, String latitude2, String longitude2) {
 //        Радиус сферы (Земли)
         final int rad = 6372795;
 
@@ -25,7 +25,7 @@ public class DistanceUtils {
         double y = Math.sqrt(Math.pow(cosLat2 * sinDelta, 2) + Math.pow(cosLat1 * sinLat2 - sinLat1 * cosLat2 * cosDelta, 2));
         double x = sinLat1 * sinLat2 + cosLat1 * cosLat2 * cosDelta;
         double ad = Math.atan2(y, x);
-        return ad * rad;
+        return (int) (ad * rad);
     }
 
     private static double toRadian(double value) {

@@ -20,6 +20,8 @@ public class Node {
     private String number;
     private String latitude;
     private String longitude;
+    private String region;
+    private boolean isCamera;
 
     @Relationship(type = "EDGES", direction = Relationship.UNDIRECTED)
     private Set<Edge> edges;
@@ -27,18 +29,20 @@ public class Node {
     public Node() {
     }
 
-    public Node(String number, String latitude, String longitude) {
+    public Node(String number, String latitude, String longitude, String region, boolean isCamera) {
+        this.id = id;
         this.number = number;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.region = region;
+        this.isCamera = isCamera;
     }
 
-    public void worksWith(Edge edge) {
+    public void addRelationship(Edge edge) {
         if (edges == null) {
             edges = new HashSet<>();
         }
         edges.add(edge);
-
     }
 
     @Override
@@ -46,15 +50,17 @@ public class Node {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Node node = (Node) o;
-        return Objects.equals(id, node.id) &&
+        return isCamera == node.isCamera &&
+                Objects.equals(id, node.id) &&
                 Objects.equals(number, node.number) &&
                 Objects.equals(latitude, node.latitude) &&
-                Objects.equals(longitude, node.longitude);
+                Objects.equals(longitude, node.longitude) &&
+                Objects.equals(region, node.region);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, number, latitude, longitude);
+        return Objects.hash(id, number, latitude, longitude, region, isCamera);
     }
 
     @Override
@@ -64,6 +70,8 @@ public class Node {
         sb.append(", number='").append(number).append('\'');
         sb.append(", latitude='").append(latitude).append('\'');
         sb.append(", longitude='").append(longitude).append('\'');
+        sb.append(", region='").append(region).append('\'');
+        sb.append(", isCamera=").append(isCamera);
         sb.append('}');
         return sb.toString();
     }

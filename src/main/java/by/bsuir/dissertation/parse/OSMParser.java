@@ -3,6 +3,7 @@ package by.bsuir.dissertation.parse;
 import by.bsuir.dissertation.entity.Edge;
 import by.bsuir.dissertation.entity.Node;
 import by.bsuir.dissertation.util.DissertationConstants;
+import by.bsuir.dissertation.util.DistanceUtils;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -56,11 +57,12 @@ public class OSMParser extends DefaultHandler {
             List<Node> nodes = way.getNodes();
             if (nodes != null && nodes.size() >= 2) {
                 for (int i = 0; i < nodes.size() - 1; i++) {
-                    Node node1 = nodes.get(i);
-                    Node node2 = nodes.get(i + 1);
-                    Edge edge = new Edge(123, node1, node2);
-                    node1.worksWith(edge);
-                    node2.worksWith(edge);
+                    Node nodeA = nodes.get(i);
+                    Node nodeB = nodes.get(i + 1);
+//                    double distance = DistanceUtils.distanceCalculate(nodeA.getLatitude(), nodeA.getLongitude(), nodeB.getLatitude(), nodeB.getLongitude());
+                    Edge edge = new Edge(123, nodeA, nodeB);
+                    nodeA.addRelationship(edge);
+                    nodeB.addRelationship(edge);
                     edges.add(edge);
                 }
             }

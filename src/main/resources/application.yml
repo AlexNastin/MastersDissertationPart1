@@ -1,0 +1,10 @@
+db:
+  neo4j:
+    uri: http://neo4j:root@localhost:7474
+    driver-class-name: org.neo4j.ogm.drivers.http.driver.HttpDriver
+
+logging:
+  level:
+    ROOT: INFO
+    org.springframework: INFO
+    org.springframework.data.neo4j: INFO
