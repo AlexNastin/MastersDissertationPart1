@@ -2,6 +2,7 @@ package by.bsuir.dissertation;
 
 import by.bsuir.dissertation.configuration.Neo4jConfiguration;
 import by.bsuir.dissertation.parse.OSMParser;
+import by.bsuir.dissertation.repository.neo4j.EdgeRepository;
 import by.bsuir.dissertation.repository.neo4j.NodeRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,9 +32,10 @@ public class DissertationApplication {
 	}
 
     @Bean
-	public CommandLineRunner demo(NodeRepository nodeRepository) {
+	public CommandLineRunner demo(NodeRepository nodeRepository, EdgeRepository edgeRepository) {
 		return args -> {
 			nodeRepository.deleteAll();
+			edgeRepository.deleteAll();
 			LOGGER.info("DELETE FINISHED");
 			try {
 				SAXParserFactory parserFactor = SAXParserFactory.newInstance();
