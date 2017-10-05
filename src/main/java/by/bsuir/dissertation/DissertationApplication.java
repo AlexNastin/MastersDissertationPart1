@@ -1,7 +1,5 @@
 package by.bsuir.dissertation;
 
-import by.bsuir.dissertation.entity.Edge;
-import by.bsuir.dissertation.entity.Node;
 import by.bsuir.dissertation.parse.OSMParser;
 import by.bsuir.dissertation.repository.NodeRepository;
 import org.neo4j.ogm.config.Configuration;
@@ -21,8 +19,6 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
 
 @SpringBootApplication
 @EnableNeo4jRepositories
@@ -62,7 +58,8 @@ public class DissertationApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(DissertationApplication.class, args);
-    }
+		log.info("FINISH");
+	}
 
 
     @Bean
@@ -75,7 +72,7 @@ public class DissertationApplication {
 				OSMParser handler = new OSMParser();
 				File file = new ClassPathResource("map.xml").getFile();
 				parser.parse(file, handler);
-				System.out.println(handler.getNodes().size());
+				log.info("Size: " + handler.getNodes().size());
 				handler.getNodes().forEach(nodeRepository::save);
 			} catch (SAXException | ParserConfigurationException | IOException e) {
 				log.error("", e);

@@ -24,13 +24,13 @@ public class Node {
     @Relationship(type = "EDGES", direction = Relationship.UNDIRECTED)
     private Set<Edge> edges;
 
+    public Node() {
+    }
+
     public Node(String number, String latitude, String longitude) {
         this.number = number;
         this.latitude = latitude;
         this.longitude = longitude;
-    }
-
-    public Node() {
     }
 
     public void worksWith(Edge edge) {
@@ -44,18 +44,17 @@ public class Node {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Node)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         Node node = (Node) o;
         return Objects.equals(id, node.id) &&
                 Objects.equals(number, node.number) &&
                 Objects.equals(latitude, node.latitude) &&
-                Objects.equals(longitude, node.longitude) &&
-                Objects.equals(edges, node.edges);
+                Objects.equals(longitude, node.longitude);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, number, latitude, longitude, edges);
+        return Objects.hash(id, number, latitude, longitude);
     }
 
     @Override
@@ -65,7 +64,6 @@ public class Node {
         sb.append(", number='").append(number).append('\'');
         sb.append(", latitude='").append(latitude).append('\'');
         sb.append(", longitude='").append(longitude).append('\'');
-        sb.append(", edges=").append(edges);
         sb.append('}');
         return sb.toString();
     }

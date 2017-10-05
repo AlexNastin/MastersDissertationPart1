@@ -1,7 +1,7 @@
 package by.bsuir.dissertation.repository;
 
-import by.bsuir.dissertation.entity.Node;
+import by.bsuir.dissertation.entity.Edge;
 import org.springframework.data.neo4j.repository.GraphRepository;
 
-public interface NodeRepository extends GraphRepository<Node> {
+public interface EdgeRepository extends GraphRepository<Edge> {
 }
