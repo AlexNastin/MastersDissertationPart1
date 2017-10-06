@@ -15,6 +15,7 @@ public class OSMParser extends DefaultHandler {
 
     private List<Node> nodesTemp = new ArrayList<>();
     private List<Node> nodes = new ArrayList<>();
+    private List<Edge> edges = new ArrayList<>();
     private List<OSMWay> osmWays = new ArrayList<>();
     private OSMWay osmWay = null;
 
@@ -38,7 +39,7 @@ public class OSMParser extends DefaultHandler {
                 break;
             case DissertationConstants.XML_PARSE.TAG_TAG:
                 if (attributes.getValue(DissertationConstants.XML_PARSE.ATTRIBUTE_K).equals(DissertationConstants.XML_PARSE.VALUE_HIGHWAY)) {
-                    for ( OSMHighwayTypes type: OSMHighwayTypes.values()) {
+                    for (OSMHighwayTypes type : OSMHighwayTypes.values()) {
                         if (attributes.getValue(DissertationConstants.XML_PARSE.ATTRIBUTE_V).equalsIgnoreCase(type.toString())) {
                             osmWays.add(osmWay);
                             break;
@@ -62,6 +63,7 @@ public class OSMParser extends DefaultHandler {
                     Edge edge = new Edge(distance, nodeA, nodeB);
                     nodeA.addRelationship(edge);
                     nodeB.addRelationship(edge);
+                    edges.add(edge);
                 }
             }
         });
@@ -75,5 +77,9 @@ public class OSMParser extends DefaultHandler {
 
     public List<Node> getNodes() {
         return nodes;
+    }
+
+    public List<Edge> getEdges() {
+        return edges;
     }
 }

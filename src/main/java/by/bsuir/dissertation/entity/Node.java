@@ -17,6 +17,7 @@ public class Node {
 
     @GraphId
     private Long id;
+
     private String number;
     private String latitude;
     private String longitude;

@@ -24,30 +24,34 @@ import java.io.IOException;
 @Import(Neo4jConfiguration.class)
 public class DissertationApplication {
 
-	private final static Logger LOGGER = LoggerFactory.getLogger(DissertationApplication.class);
+    private final static Logger LOGGER = LoggerFactory.getLogger(DissertationApplication.class);
 
     public static void main(String[] args) {
         SpringApplication.run(DissertationApplication.class, args);
-		LOGGER.info("FINISHED FULL PROCESS");
-	}
+        LOGGER.info("FINISHED FULL PROCESS");
+    }
 
     @Bean
-	public CommandLineRunner demo(NodeRepository nodeRepository, EdgeRepository edgeRepository) {
-		return args -> {
-			nodeRepository.deleteAll();
-			edgeRepository.deleteAll();
-			LOGGER.info("DELETE FINISHED");
-			try {
-				SAXParserFactory parserFactor = SAXParserFactory.newInstance();
-				SAXParser parser = parserFactor.newSAXParser();
-				OSMParser handler = new OSMParser();
-				File file = new ClassPathResource("map.xml").getFile();
-				parser.parse(file, handler);
-				LOGGER.info("Size: " + handler.getNodes().size());
-				handler.getNodes().forEach(nodeRepository::save);
-			} catch (SAXException | ParserConfigurationException | IOException e) {
-				LOGGER.error("", e);
-			}
-		};
-	}
+    public CommandLineRunner demo(NodeRepository nodeRepository, EdgeRepository edgeRepository) {
+        return args -> {
+            nodeRepository.deleteAll();
+            edgeRepository.deleteAll();
+            LOGGER.info("DELETE FINISHED");
+            try {
+                SAXParserFactory parserFactor = SAXParserFactory.newInstance();
+                SAXParser parser = parserFactor.newSAXParser();
+                OSMParser handler = new OSMParser();
+                File file = new ClassPathResource("map.xml").getFile();
+                parser.parse(file, handler);
+                LOGGER.info("Size: " + handler.getNodes().size());
+                handler.getNodes().forEach(node -> nodeRepository.save(node, 1));
+                handler.getEdges().forEach(edge -> edgeRepository.save(edge, 1));
+
+//              OR
+//				handler.getNodes().forEach(node -> nodeRepository.save(node,2));
+            } catch (SAXException | ParserConfigurationException | IOException e) {
+                LOGGER.error("", e);
+            }
+        };
+    }
 }
