@@ -15,7 +15,6 @@ public class OSMParser extends DefaultHandler {
 
     private List<Node> nodesTemp = new ArrayList<>();
     private List<Node> nodes = new ArrayList<>();
-    private List<Edge> edges = new ArrayList<>();
     private List<OSMWay> osmWays = new ArrayList<>();
     private OSMWay osmWay = null;
 
@@ -59,11 +58,10 @@ public class OSMParser extends DefaultHandler {
                 for (int i = 0; i < nodes.size() - 1; i++) {
                     Node nodeA = nodes.get(i);
                     Node nodeB = nodes.get(i + 1);
-//                    double distance = DistanceUtils.distanceCalculate(nodeA.getLatitude(), nodeA.getLongitude(), nodeB.getLatitude(), nodeB.getLongitude());
-                    Edge edge = new Edge(123, nodeA, nodeB);
+                    double distance = DistanceUtils.distanceCalculate(nodeA.getLatitude(), nodeA.getLongitude(), nodeB.getLatitude(), nodeB.getLongitude());
+                    Edge edge = new Edge(distance, nodeA, nodeB);
                     nodeA.addRelationship(edge);
                     nodeB.addRelationship(edge);
-                    edges.add(edge);
                 }
             }
         });
@@ -77,13 +75,5 @@ public class OSMParser extends DefaultHandler {
 
     public List<Node> getNodes() {
         return nodes;
-    }
-
-    public List<OSMWay> getOsmWays() {
-        return osmWays;
-    }
-
-    public List<Edge> getEdges() {
-        return edges;
     }
 }

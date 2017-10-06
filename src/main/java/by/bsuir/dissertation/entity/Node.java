@@ -30,7 +30,6 @@ public class Node {
     }
 
     public Node(String number, String latitude, String longitude, String region, boolean isCamera) {
-        this.id = id;
         this.number = number;
         this.latitude = latitude;
         this.longitude = longitude;

@@ -7,6 +7,7 @@ import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
 import java.util.Objects;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -16,6 +17,7 @@ public class Edge {
     @GraphId
     private Long id;
 
+    private String uuid;
     private double distance;
 
     @Relationship(type = "NODES", direction = Relationship.UNDIRECTED)
@@ -25,15 +27,16 @@ public class Edge {
     private Node nodeB;
 
     public Edge() {
+        this.uuid = UUID.randomUUID().toString();
     }
 
     public Edge(double distance) {
-        this.id = id;
+        this();
         this.distance = distance;
     }
 
     public Edge(double distance, Node nodeA, Node nodeB) {
-        this.distance = distance;
+        this(distance);
         this.nodeA = nodeA;
         this.nodeB = nodeB;
     }
@@ -41,21 +44,23 @@ public class Edge {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Edge)) return false;
         Edge edge = (Edge) o;
         return Double.compare(edge.distance, distance) == 0 &&
-                Objects.equals(id, edge.id);
+                Objects.equals(id, edge.id) &&
+                Objects.equals(uuid, edge.uuid);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, distance);
+        return Objects.hash(id, uuid, distance);
     }
 
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Edge{");
         sb.append("id=").append(id);
+        sb.append(", uuid='").append(uuid).append('\'');
         sb.append(", distance=").append(distance);
         sb.append('}');
         return sb.toString();
