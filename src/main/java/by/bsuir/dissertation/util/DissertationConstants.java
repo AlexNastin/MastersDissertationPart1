@@ -14,6 +14,7 @@ public class DissertationConstants {
         public static final String ATTRIBUTE_K = "k";
         public static final String ATTRIBUTE_V = "v";
         public static final String VALUE_HIGHWAY = "highway";
+        public static final String VALUE_LANDUSE = "landuse";
     }
 
 }

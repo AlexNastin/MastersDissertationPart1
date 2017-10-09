@@ -3,7 +3,7 @@ package by.bsuir.dissertation.parse;
 import by.bsuir.dissertation.entity.Edge;
 import by.bsuir.dissertation.entity.Node;
 import by.bsuir.dissertation.util.DissertationConstants;
-import by.bsuir.dissertation.util.DistanceUtils;
+import by.bsuir.dissertation.util.ParseUtils;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -17,6 +17,7 @@ public class OSMParser extends DefaultHandler {
     private List<Node> nodes = new ArrayList<>();
     private List<Edge> edges = new ArrayList<>();
     private List<OSMWay> osmWays = new ArrayList<>();
+    private List<OSMWay> polygons = new ArrayList<>();
     private OSMWay osmWay = null;
 
     @Override
@@ -45,6 +46,14 @@ public class OSMParser extends DefaultHandler {
                             break;
                         }
                     }
+                } else if (attributes.getValue(DissertationConstants.XML_PARSE.ATTRIBUTE_K).equals(DissertationConstants.XML_PARSE.VALUE_LANDUSE)) {
+                    for (OSMLanduseTypes type : OSMLanduseTypes.values()) {
+                        if (attributes.getValue(DissertationConstants.XML_PARSE.ATTRIBUTE_V).equalsIgnoreCase(type.toString())) {
+                            osmWay.setRegion(type.toString());
+                            polygons.add(osmWay);
+                            break;
+                        }
+                    }
                 }
         }
     }
@@ -59,7 +68,7 @@ public class OSMParser extends DefaultHandler {
                 for (int i = 0; i < nodes.size() - 1; i++) {
                     Node nodeA = nodes.get(i);
                     Node nodeB = nodes.get(i + 1);
-                    double distance = DistanceUtils.distanceCalculate(nodeA.getLatitude(), nodeA.getLongitude(), nodeB.getLatitude(), nodeB.getLongitude());
+                    double distance = ParseUtils.distanceCalculate(nodeA.getLatitude(), nodeA.getLongitude(), nodeB.getLatitude(), nodeB.getLongitude());
                     Edge edge = new Edge(distance, nodeA, nodeB);
                     nodeA.addRelationship(edge);
                     nodeB.addRelationship(edge);
@@ -70,6 +79,11 @@ public class OSMParser extends DefaultHandler {
 
         nodesTemp.forEach(node -> {
             if (node.getEdges() != null && node.getEdges().size() > 0) {
+                polygons.forEach(polygon -> {
+                    if (ParseUtils.containsPointInPolygon(polygon, node)) {
+                        node.setRegion(polygon.getRegion());
+                    }
+                });
                 nodes.add(node);
             }
         });

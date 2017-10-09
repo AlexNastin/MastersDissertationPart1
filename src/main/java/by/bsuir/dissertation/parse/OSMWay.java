@@ -12,6 +12,7 @@ import java.util.Objects;
 @Setter
 public class OSMWay {
 
+    private String region;
     private List<Node> nodes = new ArrayList<>();
 
     public void addNode(Node node) {
