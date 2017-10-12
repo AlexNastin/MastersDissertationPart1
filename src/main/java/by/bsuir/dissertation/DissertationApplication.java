@@ -38,17 +38,16 @@ public class DissertationApplication {
             edgeRepository.deleteAll();
             LOGGER.info("DELETE FINISHED");
             try {
+                LOGGER.info("START PARSE MAP");
                 SAXParserFactory parserFactor = SAXParserFactory.newInstance();
                 SAXParser parser = parserFactor.newSAXParser();
                 OSMParser handler = new OSMParser();
                 File file = new ClassPathResource("map.xml").getFile();
                 parser.parse(file, handler);
+                LOGGER.info("FINISHED PARSE MAP");
                 LOGGER.info("Size: " + handler.getNodes().size());
                 handler.getNodes().forEach(node -> nodeRepository.save(node, 1));
                 handler.getEdges().forEach(edge -> edgeRepository.save(edge, 1));
-
-//              OR
-//				handler.getNodes().forEach(node -> nodeRepository.save(node,2));
             } catch (SAXException | ParserConfigurationException | IOException e) {
                 LOGGER.error("", e);
             }
