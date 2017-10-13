@@ -84,6 +84,9 @@ public class OSMParser extends DefaultHandler {
                         node.setRegion(polygon.getRegion());
                     }
                 });
+                if (node.getRegion() == null) {
+                    node.setRegion(OSMLanduseTypes.UNIDENTIFIED.toString());
+                }
                 nodes.add(node);
             }
         });
