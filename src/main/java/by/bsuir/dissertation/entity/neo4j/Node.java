@@ -1,4 +1,4 @@
-package by.bsuir.dissertation.entity;
+package by.bsuir.dissertation.entity.neo4j;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,7 +1,7 @@
 package by.bsuir.dissertation.parse;
 
-import by.bsuir.dissertation.entity.Edge;
-import by.bsuir.dissertation.entity.Node;
+import by.bsuir.dissertation.entity.neo4j.Edge;
+import by.bsuir.dissertation.entity.neo4j.Node;
 import by.bsuir.dissertation.util.DissertationConstants;
 import by.bsuir.dissertation.util.ParseUtils;
 import org.xml.sax.Attributes;

@@ -1,5 +1,6 @@
 package by.bsuir.dissertation;
 
+import by.bsuir.dissertation.configuration.MongoConfiguration;
 import by.bsuir.dissertation.configuration.Neo4jConfiguration;
 import by.bsuir.dissertation.parse.OSMParser;
 import by.bsuir.dissertation.repository.neo4j.EdgeRepository;
@@ -21,7 +22,7 @@ import java.io.File;
 import java.io.IOException;
 
 @SpringBootApplication
-@Import(Neo4jConfiguration.class)
+@Import({Neo4jConfiguration.class, MongoConfiguration.class})
 public class DissertationApplication {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(DissertationApplication.class);

@@ -1,4 +1,4 @@
-package by.bsuir.dissertation.entity;
+package by.bsuir.dissertation.entity.neo4j;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -18,6 +18,7 @@ public class Edge {
     private Long id;
 
     private String uuid;
+
     private double distance;
 
     @Relationship(type = "NODES", direction = Relationship.UNDIRECTED)

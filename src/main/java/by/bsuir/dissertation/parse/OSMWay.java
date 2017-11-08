@@ -1,6 +1,6 @@
 package by.bsuir.dissertation.parse;
 
-import by.bsuir.dissertation.entity.Node;
+import by.bsuir.dissertation.entity.neo4j.Node;
 import lombok.Getter;
 import lombok.Setter;
 
