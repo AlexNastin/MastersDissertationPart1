@@ -16,4 +16,28 @@ public final class DissertationConstants {
         public static final String VALUE_HIGHWAY = "highway";
         public static final String VALUE_LANDUSE = "landuse";
     }
+
+    public static final class CAR_MOVEMENT {
+        /**
+         * In seconds
+         */
+        public static final int SAMPLING_FREQUENCY = 1;
+
+        /**
+         * In meter per second
+         */
+        public static final double INITIAL_SPEED = 0;
+        /**
+         * In meter per second
+         */
+        public static final double MAX_SPEED = 16.6;
+        /**
+         * In meter
+         */
+        public static final double INITIAL_DISTANCE = 0;
+        /**
+         * In meter per second squared
+         */
+        public static final double ACCELERATION = 1.6;
+    }
 }
