@@ -56,7 +56,7 @@ public class Way {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Way{");
+        final StringBuilder sb = new StringBuilder("WayRepository{");
         sb.append("id=").append(id);
         sb.append(", name='").append(name).append('\'');
         sb.append(", numberNodes=").append(numberNodes);

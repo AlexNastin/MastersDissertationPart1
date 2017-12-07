@@ -50,7 +50,7 @@ public class DissertationApplication {
                 handler.getNodes().forEach(node -> nodeRepository.save(node, 1));
                 handler.getEdges().forEach(edge -> edgeRepository.save(edge, 1));
             } catch (SAXException | ParserConfigurationException | IOException e) {
-                LOGGER.error("", e);
+                LOGGER.error("ERROR: ", e);
             }
         };
     }
