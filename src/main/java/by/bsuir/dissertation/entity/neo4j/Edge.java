@@ -2,6 +2,7 @@ package by.bsuir.dissertation.entity.neo4j;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.jgrapht.graph.DefaultEdge;
 import org.neo4j.ogm.annotation.GraphId;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
@@ -12,7 +13,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @NodeEntity
-public class Edge {
+public class Edge extends DefaultEdge{
 
     @GraphId
     private Long id;
