@@ -26,14 +26,17 @@ public class WaysGenerator {
             g.addEdge(edge.getNodeA(), edge.getNodeB());
         });
         DijkstraShortestPath<Node, DefaultEdge> dijkstraShortestPath = new DijkstraShortestPath(g);
-        GraphPath<Node, DefaultEdge> path = dijkstraShortestPath.getPath(nodes.get(3), nodes.get(22));
+        System.out.println("INIT");
+        GraphPath<Node, DefaultEdge> path = dijkstraShortestPath.getPath(nodes.get(3), nodes.get(5));
         path.getVertexList().forEach(System.out::println);
 
         return null;
     }
 
     private void init(Graph graph) {
+        System.out.println("INIT");
         nodes = graph.getNodes();
         edges = graph.getEdges();
+
     }
 }

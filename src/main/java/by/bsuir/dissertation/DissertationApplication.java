@@ -1,6 +1,7 @@
 package by.bsuir.dissertation;
 
 import by.bsuir.dissertation.configuration.MongoConfiguration;
+import by.bsuir.dissertation.entity.general.Graph;
 import by.bsuir.dissertation.parse.OSMParser;
 import by.bsuir.dissertation.repository.EdgeRepository;
 import by.bsuir.dissertation.repository.NodeRepository;
@@ -53,7 +54,9 @@ public class DissertationApplication {
 //            } catch (SAXException | ParserConfigurationException | IOException e) {
 //                LOGGER.error("ERROR: ", e);
 //            }
-            waysGenerator.generateWay(graphService.getGraph());
+            Graph graph = graphService.getGraph();
+            System.out.println("Graph: " + graph);
+            waysGenerator.generateWay(graph);
         };
     }
 }

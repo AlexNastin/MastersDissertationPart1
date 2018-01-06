@@ -25,8 +25,8 @@ public class DefaultGraphService implements GraphService {
 
     @Override
     public Graph getGraph() {
-//        List<Node> nodes = nodeRepository.findAll();
-//        List<Edge> edges = edgeRepository.findAll();
-        return new Graph(null, null);
+        List<Node> nodes = nodeRepository.findAll();
+        List<Edge> edges = edgeRepository.findAll();
+        return new Graph(nodes, edges);
     }
 }
