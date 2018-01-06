@@ -1,6 +1,6 @@
 package by.bsuir.dissertation.util;
 
-import by.bsuir.dissertation.entity.neo4j.Node;
+import by.bsuir.dissertation.entity.graph.Node;
 import by.bsuir.dissertation.parse.OSMWay;
 
 import java.util.List;

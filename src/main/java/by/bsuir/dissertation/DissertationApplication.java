@@ -1,10 +1,11 @@
 package by.bsuir.dissertation;
 
 import by.bsuir.dissertation.configuration.MongoConfiguration;
-import by.bsuir.dissertation.configuration.Neo4jConfiguration;
 import by.bsuir.dissertation.parse.OSMParser;
-import by.bsuir.dissertation.repository.neo4j.EdgeRepository;
-import by.bsuir.dissertation.repository.neo4j.NodeRepository;
+import by.bsuir.dissertation.repository.EdgeRepository;
+import by.bsuir.dissertation.repository.NodeRepository;
+import by.bsuir.dissertation.service.GraphService;
+import by.bsuir.dissertation.util.WaysGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -22,7 +23,7 @@ import java.io.File;
 import java.io.IOException;
 
 @SpringBootApplication
-@Import({Neo4jConfiguration.class, MongoConfiguration.class})
+@Import(MongoConfiguration.class)
 public class DissertationApplication {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(DissertationApplication.class);
@@ -33,25 +34,26 @@ public class DissertationApplication {
     }
 
     @Bean
-    public CommandLineRunner demo(NodeRepository nodeRepository, EdgeRepository edgeRepository) {
+    public CommandLineRunner demo(NodeRepository nodeRepository, EdgeRepository edgeRepository, WaysGenerator waysGenerator, GraphService graphService) {
         return args -> {
-            nodeRepository.deleteAll();
-            edgeRepository.deleteAll();
-            LOGGER.info("DELETE FINISHED");
-            try {
-                LOGGER.info("START PARSE MAP");
-                SAXParserFactory parserFactor = SAXParserFactory.newInstance();
-                SAXParser parser = parserFactor.newSAXParser();
-                OSMParser handler = new OSMParser();
-                File file = new ClassPathResource("map.xml").getFile();
-                parser.parse(file, handler);
-                LOGGER.info("FINISHED PARSE MAP");
-                LOGGER.info("Size: " + handler.getNodes().size());
-                handler.getNodes().forEach(node -> nodeRepository.save(node, 1));
-                handler.getEdges().forEach(edge -> edgeRepository.save(edge, 1));
-            } catch (SAXException | ParserConfigurationException | IOException e) {
-                LOGGER.error("ERROR: ", e);
-            }
+//            try {
+//                nodeRepository.deleteAll();
+//                edgeRepository.deleteAll();
+//                LOGGER.info("START PARSE MAP");
+//                SAXParserFactory parserFactor = SAXParserFactory.newInstance();
+//                SAXParser parser = parserFactor.newSAXParser();
+//                OSMParser handler = new OSMParser();
+//                File file = new ClassPathResource("map.xml").getFile();
+//                parser.parse(file, handler);
+//                LOGGER.info("FINISHED PARSE MAP");
+//                LOGGER.info("Size: " + handler.getNodes().size());
+//                nodeRepository.save(handler.getNodes());
+//                edgeRepository.save(handler.getEdges());
+//                LOGGER.info("FINISHED SAVE DATA");
+//            } catch (SAXException | ParserConfigurationException | IOException e) {
+//                LOGGER.error("ERROR: ", e);
+//            }
+            waysGenerator.generateWay(graphService.getGraph());
         };
     }
 }

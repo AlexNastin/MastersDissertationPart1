@@ -1,7 +1,7 @@
 package by.bsuir.dissertation.entity.general;
 
-import by.bsuir.dissertation.entity.neo4j.Edge;
-import by.bsuir.dissertation.entity.neo4j.Node;
+import by.bsuir.dissertation.entity.graph.Edge;
+import by.bsuir.dissertation.entity.graph.Node;
 import lombok.Data;
 
 import java.util.List;

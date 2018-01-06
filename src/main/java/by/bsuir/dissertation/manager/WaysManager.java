@@ -1,21 +1,13 @@
 package by.bsuir.dissertation.manager;
 
 import by.bsuir.dissertation.entity.general.Graph;
-import by.bsuir.dissertation.entity.neo4j.Edge;
-import by.bsuir.dissertation.entity.neo4j.Node;
-import by.bsuir.dissertation.repository.mongo.WayRepository;
+import by.bsuir.dissertation.repository.WayRepository;
 import by.bsuir.dissertation.service.GraphService;
 import by.bsuir.dissertation.util.WaysGenerator;
-import org.jgrapht.UndirectedGraph;
-import org.jgrapht.graph.DefaultEdge;
-import org.jgrapht.graph.SimpleGraph;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-import java.util.Set;
-
-@Component
+//@Component
 public class WaysManager {
 
     private final GraphService graphService;

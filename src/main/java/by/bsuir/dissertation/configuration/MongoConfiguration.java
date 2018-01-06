@@ -9,14 +9,15 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
-@EnableMongoRepositories(basePackages = "by.bsuir.dissertation.repository.mongo")
+@EnableMongoRepositories(basePackages = "by.bsuir.dissertation.repository")
 public class MongoConfiguration {
 
-    @Value("${db.mongodb.uri}")
+    @Value("${mongodb.uri}")
     private String uri;
 
     @Bean
     public MongoDbFactory getMongoDbFactory() throws Exception {
+        System.out.print(uri);
         MongoClientURI mongoClientURI = new MongoClientURI(uri);
         return new SimpleMongoDbFactory(mongoClientURI);
     }

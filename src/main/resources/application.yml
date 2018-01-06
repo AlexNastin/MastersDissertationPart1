@@ -1,9 +1,6 @@
-db:
-  neo4j:
-    uri: http://${NEO4J_DB_USER:neo4j}:${NEO4J_DB_PASSWORD:root}@${NEO4J_DB_HOST:localhost}:${NEO4J_DB_PORT:7474}
-    driver-class-name: org.neo4j.ogm.drivers.http.driver.HttpDriver
-  mongodb:
-    uri: mongodb://${MONGO_DB_USER:master}:${MONGO_DB_PASSWORD:master123}@${MONGO_DB_HOST:localhost}:${MONGO_DB_PORT:27017}/shared-storage
+mongodb:
+#    uri: mongodb://${MONGO_DB_USER:master}:${MONGO_DB_PASSWORD:master123}@${MONGO_DB_HOST:localhost}:${MONGO_DB_PORT:27017}/shared-storage
+  uri: mongodb://${MONGO_DB_USER:master}:${MONGO_DB_PASSWORD:master123}@ds129936.mlab.com:29936/shared-storage
 
 logging:
   level:

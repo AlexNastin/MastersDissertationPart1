@@ -1,12 +1,11 @@
 package by.bsuir.dissertation.util;
 
 import by.bsuir.dissertation.entity.general.Graph;
+import by.bsuir.dissertation.entity.graph.Edge;
+import by.bsuir.dissertation.entity.graph.Node;
 import by.bsuir.dissertation.entity.mongo.Way;
-import by.bsuir.dissertation.entity.neo4j.Edge;
-import by.bsuir.dissertation.entity.neo4j.Node;
-import org.jgrapht.EdgeFactory;
-import org.jgrapht.UndirectedGraph;
-import org.jgrapht.graph.ClassBasedEdgeFactory;
+import org.jgrapht.GraphPath;
+import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleGraph;
 import org.springframework.stereotype.Component;
@@ -21,12 +20,15 @@ public class WaysGenerator {
 
     public List<Way> generateWay(Graph graph) {
         init(graph);
-        EdgeFactory edgeFactory = new ClassBasedEdgeFactory(Edge.class);
-
-        UndirectedGraph<Node, DefaultEdge> newGraph = new SimpleGraph<>(DefaultEdge.class);
+        org.jgrapht.Graph<Node, DefaultEdge> g = new SimpleGraph<>(DefaultEdge.class);
+        nodes.forEach(g::addVertex);
         edges.forEach(edge -> {
-            newGraph.addEdge(edge.getNodeA(), edge.getNodeB(), edge);
+            g.addEdge(edge.getNodeA(), edge.getNodeB());
         });
+        DijkstraShortestPath<Node, DefaultEdge> dijkstraShortestPath = new DijkstraShortestPath(g);
+        GraphPath<Node, DefaultEdge> path = dijkstraShortestPath.getPath(nodes.get(3), nodes.get(22));
+        path.getVertexList().forEach(System.out::println);
+
         return null;
     }
 
@@ -34,5 +36,4 @@ public class WaysGenerator {
         nodes = graph.getNodes();
         edges = graph.getEdges();
     }
-
 }
