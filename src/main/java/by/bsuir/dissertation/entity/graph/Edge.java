@@ -64,9 +64,11 @@ public class Edge extends DefaultEdge {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Edge{");
-        sb.append("id=").append(id);
+        sb.append("id='").append(id).append('\'');
         sb.append(", uuid='").append(uuid).append('\'');
         sb.append(", distance=").append(distance);
+        sb.append(", nodeA=").append(nodeA);
+        sb.append(", nodeB=").append(nodeB);
         sb.append('}');
         return sb.toString();
     }

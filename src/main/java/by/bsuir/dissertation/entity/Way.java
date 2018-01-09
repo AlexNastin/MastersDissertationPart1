@@ -1,15 +1,15 @@
-package by.bsuir.dissertation.entity.mongo;
+package by.bsuir.dissertation.entity;
 
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -17,7 +17,7 @@ import java.util.Objects;
 public class Way {
 
     @Id
-    private int id;
+    private String id = UUID.randomUUID().toString();
 
     @Field
     private String name;
@@ -31,7 +31,7 @@ public class Way {
     public Way() {
     }
 
-    public Way(int id, String name, int numberNodes, Map<Integer, PartWay> fullWay) {
+    public Way(String id, String name, int numberNodes, Map<Integer, PartWay> fullWay) {
         this.id = id;
         this.name = name;
         this.numberNodes = numberNodes;

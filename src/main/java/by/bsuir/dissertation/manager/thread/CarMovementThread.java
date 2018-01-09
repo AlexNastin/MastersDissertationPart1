@@ -1,8 +1,8 @@
 package by.bsuir.dissertation.manager.thread;
 
 import by.bsuir.dissertation.entity.general.Car;
-import by.bsuir.dissertation.entity.mongo.PartWay;
-import by.bsuir.dissertation.entity.mongo.Way;
+import by.bsuir.dissertation.entity.PartWay;
+import by.bsuir.dissertation.entity.Way;
 import by.bsuir.dissertation.util.DissertationConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

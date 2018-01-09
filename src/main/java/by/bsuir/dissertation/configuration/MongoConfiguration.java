@@ -17,9 +17,7 @@ public class MongoConfiguration {
 
     @Bean
     public MongoDbFactory getMongoDbFactory() throws Exception {
-        System.out.print(uri);
-        MongoClientURI mongoClientURI = new MongoClientURI(uri);
-        return new SimpleMongoDbFactory(mongoClientURI);
+        return new SimpleMongoDbFactory(new MongoClientURI(uri));
     }
 
     @Bean

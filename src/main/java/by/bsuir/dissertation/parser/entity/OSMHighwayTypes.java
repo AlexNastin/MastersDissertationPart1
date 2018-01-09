@@ -1,4 +1,4 @@
-package by.bsuir.dissertation.parse;
+package by.bsuir.dissertation.parser.entity;
 
 public enum OSMHighwayTypes {
     MOTORWAY,

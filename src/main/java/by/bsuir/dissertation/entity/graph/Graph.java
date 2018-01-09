@@ -1,4 +1,4 @@
-package by.bsuir.dissertation.entity.general;
+package by.bsuir.dissertation.entity.graph;
 
 import by.bsuir.dissertation.entity.graph.Edge;
 import by.bsuir.dissertation.entity.graph.Node;
@@ -11,10 +11,4 @@ public class Graph {
 
     private final List<Edge> edges;
     private final List<Node> nodes;
-
-    public Graph(List<Node> nodes, List<Edge> edges) {
-        this.nodes = nodes;
-        this.edges = edges;
-    }
-
 }

@@ -1,4 +1,4 @@
-package by.bsuir.dissertation.entity.mongo;
+package by.bsuir.dissertation.entity;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -9,7 +9,7 @@ import java.util.Objects;
 @Setter
 public class PartWay {
 
-    private long id;
+    private String id;
 
     private double distance;
 

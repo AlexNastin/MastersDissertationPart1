@@ -1,7 +1,7 @@
 package by.bsuir.dissertation.util;
 
 import by.bsuir.dissertation.entity.graph.Node;
-import by.bsuir.dissertation.parse.OSMWay;
+import by.bsuir.dissertation.parser.entity.OSMWay;
 
 import java.util.List;
 

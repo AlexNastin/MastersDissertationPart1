@@ -1,8 +1,8 @@
 package by.bsuir.dissertation;
 
 import by.bsuir.dissertation.entity.general.Car;
-import by.bsuir.dissertation.entity.mongo.PartWay;
-import by.bsuir.dissertation.entity.mongo.Way;
+import by.bsuir.dissertation.entity.PartWay;
+import by.bsuir.dissertation.entity.Way;
 import by.bsuir.dissertation.manager.TrafficManager;
 
 import java.util.HashMap;
@@ -23,7 +23,7 @@ public class TestMovementTemp {
         mapWay1.put(0, partWay11);
         mapWay1.put(2, partWay13);
         mapWay1.put(1, partWay12);
-        Way way1 = new Way(0, "firstWay", 3, mapWay1);
+        Way way1 = new Way("1", "firstWay", 3, mapWay1);
 
         // second way
         Map<Integer, PartWay> mapWay2 = new HashMap<>();
@@ -36,7 +36,7 @@ public class TestMovementTemp {
         mapWay2.put(0, partWay21);
         mapWay2.put(1, partWay22);
         mapWay2.put(2, partWay23);
-        Way way2 = new Way(1, "secondWay", 3, mapWay2);
+        Way way2 = new Way("2", "secondWay", 3, mapWay2);
 
         // start cars
         TrafficManager trafficManager1 = new TrafficManager(new Car(), way1);

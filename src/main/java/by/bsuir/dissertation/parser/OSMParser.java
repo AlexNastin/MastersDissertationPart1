@@ -1,9 +1,14 @@
-package by.bsuir.dissertation.parse;
+package by.bsuir.dissertation.parser;
 
 import by.bsuir.dissertation.entity.graph.Edge;
 import by.bsuir.dissertation.entity.graph.Node;
+import by.bsuir.dissertation.parser.entity.OSMHighwayTypes;
+import by.bsuir.dissertation.parser.entity.OSMLanduseTypes;
+import by.bsuir.dissertation.parser.entity.OSMWay;
 import by.bsuir.dissertation.util.DissertationConstants;
 import by.bsuir.dissertation.util.ParseUtils;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -11,6 +16,8 @@ import org.xml.sax.helpers.DefaultHandler;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
+@Scope("prototype")
 public class OSMParser extends DefaultHandler {
 
     private List<Node> nodesTemp = new ArrayList<>();

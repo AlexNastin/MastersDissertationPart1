@@ -35,7 +35,7 @@ public class Node {
     @Field
     private boolean isCamera;
 
-    @DBRef
+    @DBRef(lazy = true)
     private Set<Edge> edges;
 
     public Node() {
@@ -77,12 +77,13 @@ public class Node {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Node{");
-        sb.append("id=").append(id);
+        sb.append("id='").append(id).append('\'');
         sb.append(", number='").append(number).append('\'');
         sb.append(", latitude='").append(latitude).append('\'');
         sb.append(", longitude='").append(longitude).append('\'');
         sb.append(", region='").append(region).append('\'');
         sb.append(", isCamera=").append(isCamera);
+        sb.append(", edges=").append(edges);
         sb.append('}');
         return sb.toString();
     }

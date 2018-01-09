@@ -1,4 +1,4 @@
-package by.bsuir.dissertation.parse;
+package by.bsuir.dissertation.parser.entity;
 
 import by.bsuir.dissertation.entity.graph.Node;
 import lombok.Getter;
