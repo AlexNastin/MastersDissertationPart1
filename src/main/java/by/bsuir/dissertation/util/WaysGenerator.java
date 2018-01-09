@@ -55,11 +55,11 @@ public class WaysGenerator implements Runnable {
         Random random = new Random();
         int finalIndex = Math.abs(random.nextInt(graph.getNodes().size()));
         if (finalIndex == 0) {
-            finalIndex = 1;
+            finalIndex++;
         }
         int startIndex = Math.abs(random.nextInt(finalIndex));
         Node nodeSource = graph.getNodes().get(startIndex);
-        Node nodeSink = graph.getNodes().get(finalIndex - 1);
+        Node nodeSink = graph.getNodes().get(finalIndex);
         return Pair.of(nodeSource, nodeSink);
     }
 
