@@ -17,11 +17,15 @@ import java.util.List;
 @Component
 public class InjectWaysGeneratorAnnotationBeanPostProcessor implements BeanPostProcessor {
 
-    @Autowired
-    private ApplicationContext applicationContext;
+    private final ApplicationContext applicationContext;
 
     @Value("${ways-generator.quantity}")
     private int quantity;
+
+    @Autowired
+    public InjectWaysGeneratorAnnotationBeanPostProcessor(ApplicationContext applicationContext) {
+        this.applicationContext = applicationContext;
+    }
 
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
