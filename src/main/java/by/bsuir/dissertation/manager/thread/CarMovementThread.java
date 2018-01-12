@@ -1,14 +1,15 @@
 package by.bsuir.dissertation.manager.thread;
 
-import by.bsuir.dissertation.entity.general.Car;
-import by.bsuir.dissertation.entity.PartWay;
-import by.bsuir.dissertation.entity.Way;
-import by.bsuir.dissertation.util.DissertationConstants;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
+import by.bsuir.dissertation.entity.Car;
+import by.bsuir.dissertation.entity.PartWay;
+import by.bsuir.dissertation.entity.Way;
+import by.bsuir.dissertation.util.DissertationConstants;
 
 public class CarMovementThread extends Thread {
     private final static Logger LOGGER = LoggerFactory.getLogger(CarMovementThread.class);
@@ -50,6 +51,7 @@ public class CarMovementThread extends Thread {
             }
         }
         car.setSpeed(DissertationConstants.CAR_MOVEMENT.INITIAL_SPEED);
+        LOGGER.info("Way completed");
         this.interrupt();
     }
 }

@@ -2,7 +2,7 @@ package by.bsuir.dissertation.repository;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import by.bsuir.dissertation.entity.Way;
+import by.bsuir.dissertation.entity.Car;
 
-public interface WayRepository extends MongoRepository<Way, String> {
+public interface CarRepository extends MongoRepository<Car, String> {
 }

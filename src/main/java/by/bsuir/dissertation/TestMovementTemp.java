@@ -1,9 +1,10 @@
 package by.bsuir.dissertation;
 
-import by.bsuir.dissertation.entity.general.Car;
+import by.bsuir.dissertation.entity.Car;
 import by.bsuir.dissertation.entity.PartWay;
 import by.bsuir.dissertation.entity.Way;
 import by.bsuir.dissertation.manager.TrafficManager;
+import by.bsuir.dissertation.util.TrafficGenerator;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -39,8 +40,8 @@ public class TestMovementTemp {
         Way way2 = new Way("2", "secondWay", 3, mapWay2);
 
         // start cars
-        TrafficManager trafficManager1 = new TrafficManager(new Car(), way1);
+        TrafficGenerator trafficGenerator1 = new TrafficGenerator(new Car(), way1);
         TimeUnit.MILLISECONDS.sleep(1000);
-        TrafficManager trafficManager2 = new TrafficManager(new Car(), way2);
+        TrafficGenerator trafficGenerator2 = new TrafficGenerator(new Car(), way2);
     }
 }

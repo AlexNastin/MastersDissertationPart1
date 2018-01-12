@@ -1,11 +1,11 @@
 package by.bsuir.dissertation.util;
 
-import by.bsuir.dissertation.annotation.InjectGraph;
-import by.bsuir.dissertation.entity.PartWay;
-import by.bsuir.dissertation.entity.Way;
-import by.bsuir.dissertation.entity.graph.Edge;
-import by.bsuir.dissertation.entity.graph.Graph;
-import by.bsuir.dissertation.entity.graph.Node;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+
 import org.jgrapht.GraphPath;
 import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
 import org.jgrapht.graph.SimpleGraph;
@@ -16,7 +16,12 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Component;
 
-import java.util.*;
+import by.bsuir.dissertation.annotation.InjectGraph;
+import by.bsuir.dissertation.entity.PartWay;
+import by.bsuir.dissertation.entity.Way;
+import by.bsuir.dissertation.entity.graph.Edge;
+import by.bsuir.dissertation.entity.graph.Graph;
+import by.bsuir.dissertation.entity.graph.Node;
 
 @Component
 @Scope("prototype")

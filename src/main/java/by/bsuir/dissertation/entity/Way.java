@@ -1,15 +1,16 @@
 package by.bsuir.dissertation.entity;
 
-import lombok.Getter;
-import lombok.Setter;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
+import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Setter

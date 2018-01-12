@@ -1,5 +1,14 @@
 package by.bsuir.dissertation.parser;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
+import org.xml.sax.helpers.DefaultHandler;
+
 import by.bsuir.dissertation.entity.graph.Edge;
 import by.bsuir.dissertation.entity.graph.Node;
 import by.bsuir.dissertation.parser.entity.OSMHighwayTypes;
@@ -7,14 +16,6 @@ import by.bsuir.dissertation.parser.entity.OSMLanduseTypes;
 import by.bsuir.dissertation.parser.entity.OSMWay;
 import by.bsuir.dissertation.util.DissertationConstants;
 import by.bsuir.dissertation.util.ParseUtils;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
-import org.xml.sax.Attributes;
-import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Component
 @Scope("prototype")
@@ -37,6 +38,7 @@ public class OSMParser extends DefaultHandler {
                 node.setNumber(attributes.getValue(DissertationConstants.XML_PARSE.ATTRIBUTE_ID));
                 node.setLatitude(attributes.getValue(DissertationConstants.XML_PARSE.ATTRIBUTE_LAT));
                 node.setLongitude(attributes.getValue(DissertationConstants.XML_PARSE.ATTRIBUTE_LON));
+                node.setCamera(true);
                 nodesTemp.add(node);
                 break;
             case DissertationConstants.XML_PARSE.TAG_WAY:
