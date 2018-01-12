@@ -1,15 +1,14 @@
 package by.bsuir.dissertation.entity;
 
-import java.util.Objects;
-import java.util.UUID;
-
+import by.bsuir.dissertation.util.DissertationConstants;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-import by.bsuir.dissertation.util.DissertationConstants;
-import lombok.Getter;
-import lombok.Setter;
+import java.util.Objects;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -17,14 +16,12 @@ import lombok.Setter;
 public class Car {
 
     @Id
-    private String id;
+    private String id = UUID.randomUUID().toString();
 
     @Field
-    private double speed;
+    private double speed = DissertationConstants.CAR_MOVEMENT.INITIAL_SPEED;
 
     public Car() {
-        id = UUID.randomUUID().toString();
-        speed = DissertationConstants.CAR_MOVEMENT.INITIAL_SPEED;
     }
 
     public Car(String id, double speed) {

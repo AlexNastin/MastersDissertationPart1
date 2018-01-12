@@ -1,4 +1,4 @@
-package by.bsuir.dissertation.manager.thread;
+package by.bsuir.dissertation.manager;
 
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -12,6 +12,7 @@ import by.bsuir.dissertation.entity.Way;
 import by.bsuir.dissertation.util.DissertationConstants;
 
 public class CarMovementThread extends Thread {
+
     private final static Logger LOGGER = LoggerFactory.getLogger(CarMovementThread.class);
 
     private Car car;

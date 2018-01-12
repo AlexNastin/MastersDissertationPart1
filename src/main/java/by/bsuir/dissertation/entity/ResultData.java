@@ -1,6 +1,7 @@
 package by.bsuir.dissertation.entity;
 
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Objects;
 
 import org.springframework.data.annotation.Id;

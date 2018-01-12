@@ -1,7 +1,7 @@
 package by.bsuir.dissertation.service;
 
-import by.bsuir.dissertation.entity.graph.Graph;
 import by.bsuir.dissertation.entity.graph.Edge;
+import by.bsuir.dissertation.entity.graph.Graph;
 import by.bsuir.dissertation.entity.graph.Node;
 import by.bsuir.dissertation.repository.EdgeRepository;
 import by.bsuir.dissertation.repository.NodeRepository;
@@ -28,5 +28,11 @@ public class DefaultGraphService implements GraphService {
         List<Node> nodes = nodeRepository.findAll();
         List<Edge> edges = edgeRepository.findAll();
         return new Graph(edges, nodes);
+    }
+
+    @Override
+    public void saveGraph(Graph graph) {
+        nodeRepository.save(graph.getNodes());
+        edgeRepository.save(graph.getEdges());
     }
 }

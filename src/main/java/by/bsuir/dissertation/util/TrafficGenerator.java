@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 import by.bsuir.dissertation.entity.Car;
 import by.bsuir.dissertation.entity.Way;
-import by.bsuir.dissertation.manager.thread.CarMovementThread;
+import by.bsuir.dissertation.manager.CarMovementThread;
 
 @Component
 @Scope("prototype")
