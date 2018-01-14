@@ -12,3 +12,6 @@ ways-generator:
   quantity: 10
   ways:
     quantity: 5
+
+cars:
+  quantity: 50

@@ -1,17 +1,14 @@
 package by.bsuir.dissertation.entity;
 
-import java.sql.Timestamp;
-import java.util.List;
-import java.util.Objects;
-
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
 
-import by.bsuir.dissertation.entity.graph.Node;
-import lombok.Getter;
-import lombok.Setter;
+import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -19,50 +16,49 @@ import lombok.Setter;
 public class ResultData {
 
     @Id
-    private String id;
-
-    @Field
-    private Timestamp date;
+    private String id = UUID.randomUUID().toString();
 
     @DBRef
     private Car car;
 
     @DBRef
-    private Node node;
+    private List<PartResultData> partResultData;
 
     public ResultData() {
     }
 
-    public ResultData(String id, Timestamp date, Car car, Node node) {
-        this.id = id;
-        this.date = date;
+    public ResultData(Car car, List<PartResultData> partResultData) {
         this.car = car;
-        this.node = node;
+        this.partResultData = partResultData;
+    }
+
+    public ResultData(String id, Car car, List<PartResultData> partResultData) {
+        this.id = id;
+        this.car = car;
+        this.partResultData = partResultData;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof ResultData)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         ResultData that = (ResultData) o;
         return Objects.equals(id, that.id) &&
-                Objects.equals(date, that.date) &&
                 Objects.equals(car, that.car) &&
-                Objects.equals(node, that.node);
+                Objects.equals(partResultData, that.partResultData);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, date, car, node);
+        return Objects.hash(id, car, partResultData);
     }
 
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("ResultData{");
         sb.append("id='").append(id).append('\'');
-        sb.append(", date=").append(date);
         sb.append(", car=").append(car);
-        sb.append(", node=").append(node);
+        sb.append(", partResultData=").append(partResultData);
         sb.append('}');
         return sb.toString();
     }

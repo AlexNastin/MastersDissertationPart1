@@ -25,9 +25,9 @@ public class WaysManager implements Runnable {
     private final TaskExecutor taskExecutor;
 
     @Autowired
-    public WaysManager(WayRepository wayRepository, TaskExecutor taskExecutor) {
+    public WaysManager(WayRepository wayRepository, TaskExecutor waysManagerTaskExecutor) {
         this.wayRepository = wayRepository;
-        this.taskExecutor = taskExecutor;
+        this.taskExecutor = waysManagerTaskExecutor;
     }
 
     private void execute() {

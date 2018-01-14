@@ -2,6 +2,7 @@ package by.bsuir.dissertation.configuration;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.task.TaskExecutor;
@@ -16,6 +17,9 @@ import javax.xml.parsers.SAXParserFactory;
 public class GeneralConfiguration {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(GeneralConfiguration.class);
+
+    @Value("${cars.quantity}")
+    private int carsQuantity;
 
     @Bean
     public SAXParserFactory saxParserFactory() {
@@ -33,12 +37,21 @@ public class GeneralConfiguration {
         return saxParser;
     }
 
-    @Bean
-    public TaskExecutor threadPoolTaskExecutor() {
+    @Bean(name = "waysManagerTaskExecutor")
+    public TaskExecutor waysManagerTaskExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         executor.setCorePoolSize(10);
-        executor.setThreadNamePrefix("taskExecutor-");
+        executor.setThreadNamePrefix("waysManagerTaskExecutor-");
         executor.initialize();
         return executor;
+    }
+
+    @Bean(name = "trafficManagerTaskExecutor")
+    public TaskExecutor trafficManagerTaskExecutor() {
+        ThreadPoolTaskExecutor scheduler = new ThreadPoolTaskExecutor();
+        scheduler.setCorePoolSize(carsQuantity);
+        scheduler.setThreadNamePrefix("trafficManagerTaskExecutor-");
+        scheduler.initialize();
+        return scheduler;
     }
 }

@@ -18,8 +18,6 @@ public final class DissertationConstants {
     }
 
     public static final class CAR_MOVEMENT {
-        public static final int CAR_MAX_COUNT = 50;
-
         /**
          * In seconds
          */
@@ -32,7 +30,7 @@ public final class DissertationConstants {
         /**
          * In meter per second
          */
-        public static final double MAX_SPEED = 2.7;
+        public static final double MAX_SPEED = 50;
         /**
          * In meter
          */
