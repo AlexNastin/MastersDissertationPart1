@@ -15,3 +15,11 @@ ways-generator:
 
 cars:
   quantity: 50
+
+full-delete: false
+
+graph:
+  update: false
+
+start-app: true
+

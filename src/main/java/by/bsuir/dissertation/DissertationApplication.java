@@ -11,6 +11,7 @@ import by.bsuir.dissertation.service.GraphService;
 import by.bsuir.dissertation.service.ParserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,6 +23,15 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @Import({MongoConfiguration.class, GeneralConfiguration.class})
 @EnableScheduling
 public class DissertationApplication {
+
+    @Value("${full-delete}")
+    private boolean fullDelete;
+
+    @Value("${graph.update}")
+    private boolean graphUpdate;
+
+    @Value("${start-app}")
+    private boolean startApp;
 
     private final static Logger LOGGER = LoggerFactory.getLogger(DissertationApplication.class);
 
@@ -36,22 +46,28 @@ public class DissertationApplication {
                                  ResultDataRepository resultDataRepository, ParserService parserService,
                                  WaysManager waysManager, TrafficManager trafficManager) {
         return args -> {
-            LOGGER.info("DELETING DATA");
-            nodeRepository.deleteAll();
-            edgeRepository.deleteAll();
-            wayRepository.deleteAll();
-            carRepository.deleteAll();
-            partResultDataRepository.deleteAll();
-            resultDataRepository.deleteAll();
-            Graph graph = parserService.parseData();
-            LOGGER.info("SAVE GRAPH");
-            graphService.saveGraph(graph);
-            LOGGER.info("SAVE GRAPH COMPLETE");
-            waysManager.run();
-            LOGGER.info("GENERATE CARS");
-            carService.createCars();
-            LOGGER.info("GENERATE CARS COMPLETE");
-            trafficManager.run();
+            if (fullDelete) {
+                LOGGER.info("DELETING DATA");
+                nodeRepository.deleteAll();
+                edgeRepository.deleteAll();
+                wayRepository.deleteAll();
+                carRepository.deleteAll();
+                partResultDataRepository.deleteAll();
+                resultDataRepository.deleteAll();
+            }
+            if (graphUpdate) {
+                Graph graph = parserService.parseData();
+                LOGGER.info("SAVE GRAPH");
+                graphService.saveGraph(graph);
+                LOGGER.info("SAVE GRAPH COMPLETE");
+            }
+            if (startApp) {
+                waysManager.run();
+                LOGGER.info("GENERATE CARS");
+                carService.createCars();
+                LOGGER.info("GENERATE CARS COMPLETE");
+                trafficManager.run();
+            }
         };
     }
 }
