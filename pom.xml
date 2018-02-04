@@ -59,6 +59,13 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!-- for test neuroph logic -->
+		<dependency>
+			<groupId>org.beykery</groupId>
+			<artifactId>neuroph</artifactId>
+			<version>2.92</version>
+		</dependency>
+
 	</dependencies>
 
 	<repositories>

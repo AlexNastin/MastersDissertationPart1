@@ -5,6 +5,7 @@ import by.bsuir.dissertation.configuration.MongoConfiguration;
 import by.bsuir.dissertation.entity.graph.Graph;
 import by.bsuir.dissertation.manager.TrafficManager;
 import by.bsuir.dissertation.manager.WaysManager;
+import by.bsuir.dissertation.neuroph.service.NormalizeService;
 import by.bsuir.dissertation.repository.*;
 import by.bsuir.dissertation.service.CarService;
 import by.bsuir.dissertation.service.GraphService;
@@ -44,7 +45,7 @@ public class DissertationApplication {
                                  WayRepository wayRepository, NodeRepository nodeRepository,
                                  EdgeRepository edgeRepository, PartResultDataRepository partResultDataRepository,
                                  ResultDataRepository resultDataRepository, ParserService parserService,
-                                 WaysManager waysManager, TrafficManager trafficManager) {
+                                 WaysManager waysManager, TrafficManager trafficManager, NormalizeService normalizeService) {
         return args -> {
             if (fullDelete) {
                 LOGGER.info("DELETING DATA");
@@ -68,6 +69,8 @@ public class DissertationApplication {
                 LOGGER.info("GENERATE CARS COMPLETE");
                 trafficManager.run();
             }
+
+            normalizeService.normalizeDataAndSaveToFile();
         };
     }
 }
