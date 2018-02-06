@@ -42,12 +42,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>commons-graph</groupId>
-			<artifactId>commons-graph</artifactId>
-			<version>0.8.1</version>
-		</dependency>
-
-		<dependency>
 			<groupId>org.jgrapht</groupId>
 			<artifactId>jgrapht-core</artifactId>
 			<version>1.0.1</version>
@@ -57,13 +51,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
-		</dependency>
-
-		<!-- for test neuroph logic -->
-		<dependency>
-			<groupId>org.beykery</groupId>
-			<artifactId>neuroph</artifactId>
-			<version>2.92</version>
 		</dependency>
 
 	</dependencies>
